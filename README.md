@@ -1,1 +1,1 @@
-# Dispatch [![GoDoc](https://godoc.org/github.com/ryanfaerman/dispatch?status.svg)](https://godoc.org/github.com/ryanfaerman/dispatch)
+# Dispatch [ ![Codeship Status for ryanfaerman/dispatch](https://codeship.com/projects/82170da0-84ed-0132-ea60-52ba9424c583/status?branch=master)](https://codeship.com/projects/58573) [![GoDoc](https://godoc.org/github.com/ryanfaerman/dispatch?status.svg)](https://godoc.org/github.com/ryanfaerman/dispatch)
