@@ -2,6 +2,7 @@ package dispatch
 
 import "encoding/xml"
 
+// H exists to add clarity when returning data
 type H map[string]interface{}
 
 // Allows type H to be used with xml.Marshal
@@ -26,13 +27,4 @@ func (h H) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
 		return err
 	}
 	return nil
-}
-
-func filterFlags(content string) string {
-	for i, a := range content {
-		if a == ' ' || a == ';' {
-			return content[:i]
-		}
-	}
-	return content
 }

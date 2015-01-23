@@ -1,3 +1,58 @@
+// Package dispatch is a lightweight api toolkit based on httprouter
+// that provides a few extra things:
+//
+//  - Standard http.HandlerFunc handlers
+//  - Middleware
+//  - Grouped Routes
+//  - Per-Group shared middlewares
+//  - Per-Request Contexts
+//  - Response Encoding
+//
+// These things already exist in many other packages and are nothing new - Dispatch
+// merely tries to keep a small and simple footprint.
+//
+// A trival example:
+//
+//   package main
+//
+//   import (
+//     "fmt"
+//     "net/http"
+//
+//     "github.com/ryanfaerman/dispatch"
+//   )
+//
+//   func main() {
+//     r := dispatch.New()
+//     r.Use(Logger)
+//     r.GET("/", Index)
+//     r.GET("/missing", Gone)
+//
+//     g := r.Group("/hello")
+//     g.GET("/:name", Hello)
+//
+//     http.ListenAndServe(":8080", r)
+//   }
+//
+//   func Index(w http.ResponseWriter, r *http.Request) {
+//     dispatch.Response(w).String(200, "Welcome!")
+//   }
+//
+//   func Hello(w http.ResponseWriter, r *http.Request) {
+//     params := dispatch.Params(r)
+//     dispatch.Response(w).String("Hello, %s!\n", params.ByName("name"))
+//   }
+//
+//   func Gone(w http.ResponseWriter, r *http.Request) {
+//     dispatch.Response(w).Abort(404)
+//   }
+//
+//   func Logger(next http.Handler) http.HandlerFunc {
+//     return func(w http.ResponseWriter, req *http.Request) {
+//       fmt.Printf("%s %s\n", req.Method, req.URL.String())
+//       next.ServeHTTP(w, req)
+//     }
+//   }
 package dispatch
 
 import (

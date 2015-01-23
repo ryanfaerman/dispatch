@@ -9,10 +9,12 @@ import (
 
 type DispatchRequest struct{ Request *http.Request }
 
+// Request "upgrades" the standard http.Request to a DispatchRequest.
 func Request(req *http.Request) *DispatchRequest {
 	return &DispatchRequest{Request: req}
 }
 
+// Retrieve the URL params for the request.
 func (dc *DispatchRequest) Params() httprouter.Params {
 	if value, ok := dc.GetOk(paramsKey); ok {
 		if params, ok := value.(httprouter.Params); ok {
@@ -22,14 +24,17 @@ func (dc *DispatchRequest) Params() httprouter.Params {
 	return httprouter.Params{}
 }
 
+// Store a value in the request-context.
 func (dc *DispatchRequest) Set(key interface{}, value interface{}) {
 	httpcontext.Set(dc.Request, key, value)
 }
 
+// Retrieve a value from the request-context.
 func (dc *DispatchRequest) Get(key interface{}) (val interface{}) {
 	return httpcontext.Get(dc.Request, key)
 }
 
+// Retrieve a value and if it exists from the request-context
 func (dc *DispatchRequest) GetOk(key interface{}) (val interface{}, ok bool) {
 	return httpcontext.GetOk(dc.Request, key)
 }
